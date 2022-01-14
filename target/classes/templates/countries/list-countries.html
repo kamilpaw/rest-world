@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Countries</title>
+<meta charset="utf-8">
+<link type="text/css" rel="stylesheet" th:href="@{/css/style1.css}" />
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>LIST OF COUNTRIES</h2>
+		</div>
+	</div>
+
+	<p>
+		<a th:href="@{/}">Back to Start Page</a>
+	</p>
+
+
+	<form action="#" th:action="@{/countries/search}" method="GET">
+
+		<input type="search" name="code" placeholder="Code" /> <input
+			type="search" name="name" placeholder="Name" /> <input
+			type="search" name="region" placeholder="Region" />
+
+		<button type="submit">Search</button>
+
+	</form>
+
+
+
+	<div id="container">
+
+		<div id="content">
+
+			<table border="1">
+
+				<thead>
+					<tr>
+						<th><a th:href="@{/countries/sortByCode}">Code</a>
+						<th><a th:href="@{/countries/sortByName}">Name</a>
+						<th><a th:href="@{/countries/sortByRegion}">Region</a>
+						<th><a th:href="@{/countries/sortBySurface}">Surface</a>
+						<th>Independence Year</th>
+						<th>Population</th>
+						<th>Life Expectancy</th>
+						<th>GNP</th>
+						<th>GNPOld</th>
+						<th>Local Name</th>
+						<th>Government Form</th>
+						<th>Head Of State</th>
+						<th>Capital</th>
+						<th>Code2</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="tempCountry : ${countries}">
+						<td th:text="${tempCountry?.code}">
+						<td th:text="${tempCountry?.name}">
+						<td th:text="${tempCountry?.region}">
+						<td th:text="${tempCountry?.surfaceArea}">
+						<td th:text="${tempCountry?.indepYear}">
+						<td th:text="${tempCountry?.population}">
+						<td th:text="${tempCountry?.lifeExpectancy}">
+						<td th:text="${tempCountry?.gNP}">
+						<td th:text="${tempCountry?.gNPOld}">
+						<td th:text="${tempCountry?.localName}">
+						<td th:text="${tempCountry?.governmentForm}">
+						<td th:text="${tempCountry?.headOfState}">
+						<td th:text="${tempCountry?.capital?.name}">
+						<td th:text="${tempCountry?.code2}">
+					</tr>
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<title>Languages</title>
+	<meta charset="utf-8">
+	<link type="text/css"
+		  rel="stylesheet"
+		  th:href="@{/css/style1.css}" />
+		  
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="header">
+			<h2>LIST OF LANGUAGES</h2>
+			</div>
+	</div>
+			
+	<p>
+		<a th:href="@{/}">Back to Start Page</a>
+	</p>
+	
+		<form action="#" th:action="@{/languages/search}" method="GET">
+			
+			<input type="search"
+					name="language"
+					placeholder="Language"
+				/>
+			
+			<input type="search"
+					name="country"
+					placeholder="Country"
+				/>
+		
+			<button type="submit">Search</button>
+		
+		</form>
+
+	<div id="container">
+	
+		<div id="content">
+			
+			<table border="1">
+			
+				<thead>
+					<tr>
+						<th>
+						<a th:href="@{/languages/orderByCountry}">Country</a>
+						<th>Country Code</th>
+						<th>
+						<a th:href="@{/languages/orderByLanguage}">Language</a>
+						<th>Is Official</th>
+						<th>Percentage</th>
+					</tr>
+				</thead>
+			
+				<tbody>
+					<tr th:each="tempLanguage : ${languages}">
+						<td th:text="${tempLanguage.countryCode.name}">
+						<td th:text="${tempLanguage.countryCode.code}">
+						<td th:text="${tempLanguage.language}">
+						<td th:text="${tempLanguage.isOfficial}">
+						<td th:text="${tempLanguage.percentage}">
+					</tr>
+				</tbody>
+	
+			</table>
+			
+		</div>
+	
+	</div>
+
+</body>
+
+</html>

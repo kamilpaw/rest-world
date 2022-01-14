@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<title>Cities</title>
+	<meta charset="utf-8">
+	<link type="text/css"
+		  rel="stylesheet"
+		  th:href="@{/css/style1.css}" />
+	
+</head>
+
+<body>
+
+	<div id="wrapper">
+		<div id="header">
+			<h2>LIST OF CITIES:</h2>
+		</div>
+	</div>	
+	
+	<p>
+		<a th:href="@{/}">Back to Start Page</a>
+	</p>
+	
+	<p>
+		<a th:href="@{/cities/addCity}">
+		<button type="submit">Add City</button>
+		</a>
+	</p>
+	
+		<form action="#" th:action="@{/cities/search}" method="GET">
+		
+			<input type="search"
+					name="name"
+					placeholder="Name"
+					/>
+					
+			<input type="search"
+					name="country"
+					placeholder="Country"
+					/>
+			
+			<button type="submit">Search</button>
+		
+		</form>
+	
+	<div id="container">
+	
+		<div id="content">
+				
+			<table border="1">
+	
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>
+							<a th:href="@{/cities/orderByName}">Name</a>
+						<th>
+							<a th:href="@{/cities/orderByCountry}">Country</a>
+						<th>Country Code</th>
+						<th>District</th>
+						<th>
+							<a th:href="@{/cities/orderByPopulation}">Population</a>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr th:each="tempCity : ${cities}">
+						<td th:text="${tempCity.id}">
+						<td th:text="${tempCity.name}">
+						<td th:text="${tempCity.country.name}">
+						<td th:text="${tempCity.country.code}">
+						<td th:text="${tempCity.district}">
+						<td th:text="${tempCity.population}">
+						<td>
+							<a th:href="@{/cities/updateCity(cityId = ${tempCity.id})}">
+								<button type="button">UPDATE CITY</button>
+							</a>
+						
+						<td>
+							<a th:href="@{/cities/deleteCity(cityId = ${tempCity.id})}">
+								<button type="submit">DELETE CITY</button>
+							</a>
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
+	
+	</div>
+	
+</body>
+
+</html>
