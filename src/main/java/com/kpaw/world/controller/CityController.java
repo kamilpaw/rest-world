@@ -1,21 +1,16 @@
 package com.kpaw.world.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.kpaw.world.dto.CityDTO;
 import com.kpaw.world.dto.Mapper;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
-
 import com.kpaw.world.entity.City;
 import com.kpaw.world.service.CityService;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/world")
@@ -49,10 +44,14 @@ public class CityController {
     }
 
     @PostMapping("/cities")
-    public CityDTO addCity(@RequestBody @Valid CityDTO theCityDTO) {
-        theCityDTO.setId(0);
-        cityService.save(mapper.toCity(theCityDTO));
-        return theCityDTO;
+    public CityDTO addCity(@RequestBody @Valid CityDTO theCityDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            throw new RuntimeException(bindingResult.getAllErrors().toString());
+        } else {
+            theCityDTO.setId(0);
+            cityService.save(mapper.toCity(theCityDTO));
+            return theCityDTO;
+        }
     }
 
     @PutMapping("/cities")
@@ -88,19 +87,6 @@ public class CityController {
             cityDTOS.add(mapper.toDto(c));
         }
         return cityDTOS;
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> ValidationExceptions(MethodArgumentNotValidException ex){
-
-        Map<String, String> errors=new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error)->{
-            String fieldName=((FieldError)error).getField();
-            String errorMessage=error.getDefaultMessage();
-            errors.put(fieldName,errorMessage);
-        });
-        return errors;
     }
 }
 

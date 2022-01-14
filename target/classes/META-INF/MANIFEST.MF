@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Built-By: Kamil
-Build-Jdk: 15.0.1
-Implementation-Title: world
-Implementation-Version: 0.0.1-SNAPSHOT
-Implementation-Vendor-Id: com.kpaw
-Implementation-URL: https://spring.io/projects/spring-boot/world
-Created-By: Maven Integration for Eclipse
-
