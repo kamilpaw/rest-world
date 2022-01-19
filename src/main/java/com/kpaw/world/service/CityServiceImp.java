@@ -1,60 +1,46 @@
 package com.kpaw.world.service;
 
-import java.util.List;
-
+import com.kpaw.world.controller.CityNotFoundException;
+import com.kpaw.world.dao.CityRepository;
+import com.kpaw.world.dto.CityDTO;
+import com.kpaw.world.dto.Mapper;
+import com.kpaw.world.entity.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kpaw.world.dao.CityRepository;
-import com.kpaw.world.entity.City;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CityServiceImp implements CityService {
 
+	private Mapper mapper;
 	private CityRepository cityRepository;
 
 	@Autowired
-	public CityServiceImp(CityRepository theCityRepository) {
+	public CityServiceImp(CityRepository theCityRepository, Mapper theMapper) {
 		this.cityRepository = theCityRepository;
-
+		this.mapper = theMapper;
 	}
 
 	@Override
 	@Transactional
-	public List<City> findAll() {
-		return cityRepository.findAll();
+	public List<CityDTO> findAll() {
+		return cityRepository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
-	public List<City> searchBy(String theName, String theCountry) {
-		return cityRepository.findByNameAndCountry(theName, theCountry);
+	public List<CityDTO> searchBy(String theName, String theCountry) {
+		return cityRepository.findByNameAndCountry(theName, theCountry).stream().map(mapper::toDto).collect(Collectors.toList());
 	}
+
 
 	@Override
 	@Transactional
-	public List<City> orderByName() {
-		return cityRepository.sortByNameAsc();
-	}
-
-	@Override
-	@Transactional
-	public List<City> orderByCountry() {
-		return cityRepository.sortByCountryNameAsc();
-	}
-
-	@Override
-	@Transactional
-	public List<City> orderByPopulation() {
-		return cityRepository.sortByPopulationAsc();
-	}
-
-	@Override
-	@Transactional
-	public void save(City theCity) {
-		cityRepository.save(theCity);
-
+	public void save(CityDTO cityDTO) {
+		cityRepository.save(mapper.toCity(cityDTO));
 	}
 
 	@Override
@@ -64,9 +50,11 @@ public class CityServiceImp implements CityService {
 
 	@Override
 	@Transactional
-	public City findById(int theId) {
+	public CityDTO findById(int theId) {
 		City theCity = cityRepository.findById(theId);
-		return theCity;
+		if (theCity==null){
+			throw new CityNotFoundException("City not found, id doesn't exist: " + theId);
+		}
+		return mapper.toDto(theCity);
 	}
-
 }

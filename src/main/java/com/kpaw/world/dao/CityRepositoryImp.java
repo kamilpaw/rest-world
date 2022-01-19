@@ -65,28 +65,4 @@ public class CityRepositoryImp implements CityRepository{
 		return cities;
 	};
 
-	public List<City> sortByNameAsc(){
-		Session currentSession = sessionFactory.openSession();
-		Query<City> theQuery = 
-				currentSession.createQuery("from City order by name", City.class);
-		List<City> cities = theQuery.getResultList();
-		return cities;
-	};
-
-	public List<City> sortByCountryNameAsc(){
-		Session currentSession = sessionFactory.openSession();
-		Query<City> theQuery = 
-				currentSession.createQuery("from City order by country.name", City.class);
-		List<City> cities = theQuery.getResultList();
-		return cities;
-	};
-
-	public List<City> sortByPopulationAsc(){
-		Session currentSession = sessionFactory.openSession();
-		Query<City> theQuery = 
-				currentSession.createQuery("from City order by population asc", City.class);
-		List<City> cities = theQuery.getResultList();
-		return cities;
-	}
-
 }

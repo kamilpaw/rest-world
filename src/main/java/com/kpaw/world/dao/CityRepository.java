@@ -16,10 +16,4 @@ public interface CityRepository {
 
 	public List<City> findByNameAndCountry(String theName, String theCountry);
 
-	public List<City> sortByNameAsc();
-
-	public List<City> sortByCountryNameAsc();
-
-	public List<City> sortByPopulationAsc();
-
 }

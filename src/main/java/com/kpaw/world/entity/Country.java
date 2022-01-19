@@ -70,7 +70,10 @@ public class Country {
 	private List<CountryLanguage> countryLanguages;
 
 	public Country() {
+	}
 
+	public Country(String code) {
+		this.code = code;
 	}
 
 	public Country(String code, String name, String region, Double surfaceArea, Short indepYear, Integer population,

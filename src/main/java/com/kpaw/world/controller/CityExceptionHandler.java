@@ -16,7 +16,7 @@ public class CityExceptionHandler {
 	@ExceptionHandler
 	public ResponseEntity<CityErrorResponse> handleException(CityNotFoundException exc){
 		CityErrorResponse error = new CityErrorResponse(
-				HttpStatus.NOT_EXTENDED.value(),
+				HttpStatus.NOT_FOUND.value(),
 				exc.getMessage(),
 				System.currentTimeMillis());
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
@@ -25,32 +25,18 @@ public class CityExceptionHandler {
 	@ExceptionHandler
 	public ResponseEntity<CityErrorResponse> MessageNotReadeable(HttpMessageNotReadableException exc){
 		CityErrorResponse error = new CityErrorResponse(
-				HttpStatus.NOT_IMPLEMENTED.value(),
+				HttpStatus.BAD_REQUEST.value(),
 				"Invalid field values",
 				System.currentTimeMillis());
-		return new ResponseEntity<>(error, HttpStatus.NOT_IMPLEMENTED);
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
-
-
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<CityErrorResponse> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
-		BindingResult result = ex.getBindingResult();
-		List<org.springframework.validation.FieldError> fieldErrors = result.getFieldErrors();
-		CityErrorResponse error = new CityErrorResponse(
-				HttpStatus.NOT_EXTENDED.value(),
-				fieldErrors.toString(),
-				System.currentTimeMillis());
-		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-	}
-
 	
 	@ExceptionHandler
 	public ResponseEntity<CityErrorResponse> handleException(Exception exc){
 		CityErrorResponse error = new CityErrorResponse(
-				HttpStatus.NOT_ACCEPTABLE.value(),
+				HttpStatus.NOT_FOUND.value(),
 				exc.getMessage(),
 				System.currentTimeMillis());
-		return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
-
 }
