@@ -6,14 +6,16 @@ import com.kpaw.world.entity.City;
 
 public interface CityRepository {
 	
-	public List<City> findAll();
+	List<City> findAll();
 	
-	public void save(City theCity);
+	void save(City theCity);
 
-	public void deleteCityById(int theId);
+	void deleteCityById(int theId);
 
-	public City findById(int theId);
+	City findById(int theId);
 
-	public List<City> findByNameAndCountry(String theName, String theCountry);
+	City findByName(String theName);
+
+	List<City> findByNameAndCountry(String theName, String theCountry);
 
 }

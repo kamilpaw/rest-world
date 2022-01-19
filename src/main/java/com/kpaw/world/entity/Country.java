@@ -77,6 +77,26 @@ public class Country {
 	}
 
 	public Country(String code, String name, String region, Double surfaceArea, Short indepYear, Integer population,
+				   Double lifeExpectancy, Double gNP, Double gNPOld, String localName, String governmentForm,
+				   String headOfState, City capital, String code2) {
+		super();
+		this.code = code;
+		this.name = name;
+		this.region = region;
+		this.surfaceArea = surfaceArea;
+		this.indepYear = indepYear;
+		this.population = population;
+		this.lifeExpectancy = lifeExpectancy;
+		this.gNP = gNP;
+		this.gNPOld = gNPOld;
+		this.localName = localName;
+		this.governmentForm = governmentForm;
+		this.headOfState = headOfState;
+		this.capital = capital;
+		this.code2 = code2;
+	}
+
+	public Country(String code, String name, String region, Double surfaceArea, Short indepYear, Integer population,
 			Double lifeExpectancy, Double gNP, Double gNPOld, String localName, String governmentForm,
 			String headOfState, City capital, String code2, List<City> cities, List<CountryLanguage> countryLanguages) {
 		super();

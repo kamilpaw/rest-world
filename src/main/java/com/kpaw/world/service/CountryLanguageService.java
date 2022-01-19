@@ -1,17 +1,15 @@
 package com.kpaw.world.service;
 
-import java.util.List;
-
+import com.kpaw.world.dto.CountryLanguageDTO;
 import com.kpaw.world.entity.CountryLanguage;
+
+import java.util.List;
 
 public interface CountryLanguageService {
 
-	public List<CountryLanguage> findAll();
+	public List<CountryLanguageDTO> findAll();
 
-	public List<CountryLanguage> searchBy(String theLanguage, String theCountry);
+	public List<CountryLanguageDTO> searchBy(String theLanguage, String theCountry);
 
-	public List<CountryLanguage> orderByName();
-
-	public List<CountryLanguage> orderByLanguage();
 
 }

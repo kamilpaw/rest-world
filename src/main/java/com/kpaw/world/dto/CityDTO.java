@@ -20,9 +20,6 @@ public class CityDTO {
     @NotNull(message = "Population is required")
     private Integer population;
 
-    public CityDTO(){
-    }
-
     public CityDTO(Integer id, String name, String countryCode,
                    String district, Integer population) {
         this.id = id;
@@ -71,7 +68,6 @@ public class CityDTO {
     public void setPopulation(Integer population) {
         this.population = population;
     }
-
 
 
     @Override

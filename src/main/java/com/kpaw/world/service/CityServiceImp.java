@@ -17,30 +17,32 @@ public class CityServiceImp implements CityService {
 
 	private Mapper mapper;
 	private CityRepository cityRepository;
+	private CountryService countryService;
 
 	@Autowired
-	public CityServiceImp(CityRepository theCityRepository, Mapper theMapper) {
+	public CityServiceImp(CityRepository theCityRepository, Mapper theMapper, CountryService countryService) {
 		this.cityRepository = theCityRepository;
+		this.countryService = countryService;
 		this.mapper = theMapper;
 	}
 
 	@Override
 	@Transactional
 	public List<CityDTO> findAll() {
-		return cityRepository.findAll().stream().map(mapper::toDto).collect(Collectors.toList());
+		return cityRepository.findAll().stream().map(mapper::toCityDto).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
 	public List<CityDTO> searchBy(String theName, String theCountry) {
-		return cityRepository.findByNameAndCountry(theName, theCountry).stream().map(mapper::toDto).collect(Collectors.toList());
+		return cityRepository.findByNameAndCountry(theName, theCountry).stream().map(mapper::toCityDto).collect(Collectors.toList());
 	}
 
 
 	@Override
 	@Transactional
 	public void save(CityDTO cityDTO) {
-		cityRepository.save(mapper.toCity(cityDTO));
+		cityRepository.save(mapper.toCity(cityDTO, countryService));
 	}
 
 	@Override
@@ -55,6 +57,12 @@ public class CityServiceImp implements CityService {
 		if (theCity==null){
 			throw new CityNotFoundException("City not found, id doesn't exist: " + theId);
 		}
-		return mapper.toDto(theCity);
+		return mapper.toCityDto(theCity);
 	}
+
+	@Override
+	public City findCityById(int theId) {
+		return cityRepository.findById(theId);
+	}
+
 }

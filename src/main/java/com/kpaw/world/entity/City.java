@@ -46,12 +46,6 @@ public class City {
 
 	}
 
-	public City(String name, Country country, String district, Integer population) {
-		this.name = name;
-		this.country = country;
-		this.district = district;
-		this.population = population;
-	}
 
 	public City(Integer id, String name, Country country, String district, Integer population) {
 		this.id = id;
@@ -60,16 +54,7 @@ public class City {
 		this.district = district;
 		this.population = population;
 	}
-	
-	public City(Integer id, String name, String countryCode, String district, Integer population) {
-		this.id = id;
-		this.name = name;
-		this.country.setCode(countryCode); 
-		this.district = district;
-		this.population = population;
-	}
-	
-	
+
 
 	public Integer getId() {
 		return id;

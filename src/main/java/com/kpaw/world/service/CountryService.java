@@ -2,21 +2,24 @@ package com.kpaw.world.service;
 
 import java.util.List;
 
+import com.kpaw.world.dto.CountryDTO;
 import com.kpaw.world.entity.Country;
 
 public interface CountryService {
 
-	public List<Country> findAll();
+	public List<CountryDTO> findAll();
 
-	public List<Country> searchBy(String theCode, String theName, String theRegion);
+	public List<CountryDTO> searchBy(String theCode, String theName, String theRegion);
 
-	public List<Country> orderByRegion();
+	public List<CountryDTO> orderByRegion();
 
-	public List<Country> orderByName();
+	public List<CountryDTO> orderByName();
 
-	public List<Country> orderBySurface();
+	public List<CountryDTO> orderBySurface();
 
-	public List<Country> orderByCode();
+	public List<CountryDTO> orderByCode();
 
-	public Country findById(String theCountryCode);
+	public CountryDTO findCountryDTOById(String theCountryCode);
+
+	public Country findCountryById(String theCountryCode);
 }

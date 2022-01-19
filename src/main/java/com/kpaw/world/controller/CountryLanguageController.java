@@ -1,18 +1,17 @@
 package com.kpaw.world.controller;
 
-import java.util.List;
-
-import org.springframework.stereotype.Controller;
+import com.kpaw.world.dto.CountryLanguageDTO;
+import com.kpaw.world.service.CountryLanguageService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.kpaw.world.entity.CountryLanguage;
-import com.kpaw.world.service.CountryLanguageService;
+import java.util.List;
 
-@Controller
-@RequestMapping("/languages")
+@RestController
+@RequestMapping("/world")
 public class CountryLanguageController {
 
 	private CountryLanguageService countryLanguageService;
@@ -21,37 +20,19 @@ public class CountryLanguageController {
 		countryLanguageService = theCountryLanguageService;
 	}
 
-	@GetMapping("/list")
-	public String showCountryLanguages(Model theModel) {
-		List<CountryLanguage> countryLanguages = countryLanguageService.findAll();
-		theModel.addAttribute("languages", countryLanguages);
-		return "/languages/list-languages";
+	@GetMapping("/countrylanguages")
+	public List<CountryLanguageDTO> showCountryLanguages(Model theModel) {
+		return countryLanguageService.findAll();
 	}
 
-	@GetMapping("/search")
-	public String search(@RequestParam("language") String theLanguage, @RequestParam("country") String theCountry,
-			Model theModel) {
-		if (theLanguage.trim().isEmpty() && theCountry.trim().isEmpty()) {
-			return "redirect:/languages/list";
+	@GetMapping("/countrylanguages/search")
+	public List<CountryLanguageDTO> searchByLanguageAndCountry(@RequestParam(defaultValue = "") String language,
+											 @RequestParam(defaultValue = "") String country) {
+		if (language.trim().isEmpty() && country.trim().isEmpty()) {
+			return countryLanguageService.findAll();
 		} else {
-			List<CountryLanguage> countryLanguages = countryLanguageService.searchBy(theLanguage, theCountry);
-			theModel.addAttribute("languages", countryLanguages);
-			return "/languages/list-languages";
+			return countryLanguageService.searchBy(language, country);
 		}
-	}
-
-	@GetMapping("/orderByCountry")
-	public String sortByCountry(Model theModel) {
-		List<CountryLanguage> countryLanguages = countryLanguageService.orderByName();
-		theModel.addAttribute("languages", countryLanguages);
-		return "/languages/list-languages";
-	}
-
-	@GetMapping("/orderByLanguage")
-	public String sortByLanguage(Model theModel) {
-		List<CountryLanguage> countryLanguages = countryLanguageService.orderByLanguage();
-		theModel.addAttribute("languages", countryLanguages);
-		return "/languages/list-languages";
 	}
 
 }

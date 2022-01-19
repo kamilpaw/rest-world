@@ -3,6 +3,8 @@ package com.kpaw.world.dao;
 import java.util.List;
 
 import org.hibernate.Session;
+
+
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,14 @@ public class CityRepositoryImp implements CityRepository{
 		City theCity = currentSession.get(City.class, theId);
 		return theCity;
 	};
+
+	@Override
+	public City findByName(String theName) {
+		Session currentSession = sessionFactory.openSession();
+		City theCity = currentSession.get(City.class, theName);
+		return theCity;
+	};
+
 	
 	@Override
 	public List<City> findByNameAndCountry(String theName, String theCountry){
