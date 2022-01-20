@@ -11,15 +11,5 @@ public interface CountryService {
 
 	public List<CountryDTO> searchBy(String theCode, String theName, String theRegion);
 
-	public List<CountryDTO> orderByRegion();
-
-	public List<CountryDTO> orderByName();
-
-	public List<CountryDTO> orderBySurface();
-
-	public List<CountryDTO> orderByCode();
-
-	public CountryDTO findCountryDTOById(String theCountryCode);
-
 	public Country findCountryById(String theCountryCode);
 }

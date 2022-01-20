@@ -13,6 +13,18 @@ public class CountryLanguageDTO {
 
     private Double percentage;
 
+    public CountryLanguageDTO(){
+
+    }
+
+    public CountryLanguageDTO(String countryCode, String language, IsOfficial isOfficial, Double percentage) {
+        this.countryCode = countryCode;
+        this.language = language;
+        this.isOfficial = isOfficial;
+        this.percentage = percentage;
+    }
+
+
     public String getCountryCode() {
         return countryCode;
     }
@@ -45,13 +57,5 @@ public class CountryLanguageDTO {
         this.percentage = percentage;
     }
 
-    public CountryLanguageDTO(String countryCode, String language, IsOfficial isOfficial, Double percentage) {
-        this.countryCode = countryCode;
-        this.language = language;
-        this.isOfficial = isOfficial;
-        this.percentage = percentage;
 
-
-
-    }
 }

@@ -5,11 +5,7 @@ import com.kpaw.world.entity.Country;
 import com.kpaw.world.entity.CountryLanguage;
 import com.kpaw.world.service.CityService;
 import com.kpaw.world.service.CountryService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 @Component
 public class Mapper {

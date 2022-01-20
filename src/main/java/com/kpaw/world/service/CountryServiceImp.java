@@ -5,7 +5,6 @@ import com.kpaw.world.dto.CountryDTO;
 import com.kpaw.world.dto.Mapper;
 import com.kpaw.world.entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,35 +36,6 @@ public class CountryServiceImp implements CountryService {
 				theRegion).stream().map(mapper::toCountryDTO).collect(Collectors.toList());
 	}
 
-	@Override
-	@Transactional
-	public List<CountryDTO> orderByRegion() {
-		return countryRepository.orderByRegion().stream().map(mapper::toCountryDTO).collect(Collectors.toList());
-	}
-
-	@Override
-	@Transactional
-	public List<CountryDTO> orderByName() {
-		return countryRepository.orderByName().stream().map(mapper::toCountryDTO).collect(Collectors.toList());
-	}
-
-	@Override
-	@Transactional
-	public List<CountryDTO> orderBySurface() {
-		return countryRepository.orderBySurface().stream().map(mapper::toCountryDTO).collect(Collectors.toList());
-	}
-
-	@Override
-	@Transactional
-	public List<CountryDTO> orderByCode() {
-		return countryRepository.orderByCode().stream().map(mapper::toCountryDTO).collect(Collectors.toList());
-	}
-
-	@Override
-	@Transactional
-	public CountryDTO findCountryDTOById(String theCountryCode) {
-		return mapper.toCountryDTO(countryRepository.findById(theCountryCode));
-	}
 
 	@Override
 	public Country findCountryById(String theCountryCode) {

@@ -19,9 +19,11 @@ class CityControllerTestIT {
     @Autowired
     private TestRestTemplate restTemplate;
 
+
     @Test
     void testfindAll() {
-        CityDTO[] cityDTOList = restTemplate.getForObject("http://localhost:" + port +"/world/cities", CityDTO[].class);
+        CityDTO[] cityDTOList = restTemplate.getForObject("http://localhost:" + port + "/world/cities", CityDTO[].class);
         assertTrue(cityDTOList.length > 0);
     }
+
 }

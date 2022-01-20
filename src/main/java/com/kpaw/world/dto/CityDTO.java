@@ -20,6 +20,10 @@ public class CityDTO {
     @NotNull(message = "Population is required")
     private Integer population;
 
+    public CityDTO(){
+
+    }
+
     public CityDTO(Integer id, String name, String countryCode,
                    String district, Integer population) {
         this.id = id;

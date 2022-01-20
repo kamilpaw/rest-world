@@ -16,8 +16,7 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.reset;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -47,7 +46,7 @@ class CityControllerTest extends ControllerTest {
     }
 
     @Test
-    void findCityById() throws Exception {
+    void testFindCityById() throws Exception {
         given(cityService.findById(anyInt())).willReturn(validCity);
         MvcResult mvcResult = mockMvc.perform(get("/world/cities/" + validCity.getId()))
                 .andExpect(status().isOk())
@@ -58,25 +57,35 @@ class CityControllerTest extends ControllerTest {
         System.out.println(mvcResult.getResponse().getContentAsString());
     }
 
+
     @Test
-    void findAll() throws Exception {
+    void testFindCityByIdThrowExc() throws Exception {
+        given(cityService.findById(anyInt())).willThrow(new CityNotFoundException("message"));
+       MvcResult mvcResult = mockMvc.perform(get("/world/cities/" + validCity.getId()))
+                .andExpect(status().isNotFound())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message", is("message")))
+                .andReturn();
+        System.out.println(mvcResult.getResponse().getContentAsString());
+    }
+
+    @Test
+    void testFindAll() throws Exception {
         given(cityService.findAll()).willReturn(allValidCities);
         MvcResult mvcResult = mockMvc.perform(get("/world/cities"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.size()", is(2)))
                 .andReturn();
         String content = mvcResult.getResponse().getContentAsString();
-        CityDTO[] cities = this.mapFromJson(content, CityDTO[].class);
+        CityDTO[] cities = super.mapFromJson(content, CityDTO[].class);
         assertTrue(cities.length > 0);
         System.out.println(mvcResult.getResponse().getContentAsString());
     }
 
-
     @Test
-    void addCity() throws Exception {
+    void testAddCity() throws Exception {
         CityDTO city3 = new CityDTO(3, "city3", "countryCode3", "District3", 3);
-        MvcResult mvcResult = mockMvc.perform(post("/world/cities").contentType(MediaType.APPLICATION_JSON_VALUE).content(this.mapToJson(city3)))
+        MvcResult mvcResult = mockMvc.perform(post("/world/cities").contentType(MediaType.APPLICATION_JSON_VALUE).content(super.mapToJson(city3)))
                 .andExpect(status().isOk())
                 .andReturn();
         int status = mvcResult.getResponse().getStatus();
@@ -88,7 +97,7 @@ class CityControllerTest extends ControllerTest {
     }
 
     @Test
-    void updateCity() throws Exception {
+    void testUpdateCity() throws Exception {
         validCity.setPopulation(1000);
         MvcResult mvcResult = mockMvc.perform(put("/world/cities").contentType(MediaType.APPLICATION_JSON_VALUE).content(this.mapToJson(validCity)))
                 .andExpect(status().isOk())
@@ -100,7 +109,7 @@ class CityControllerTest extends ControllerTest {
     }
 
     @Test
-    void deleteCityById() throws Exception {
+    void testDeleteCityById() throws Exception {
         MvcResult mvcResult = mockMvc.perform(delete("/world/cities/" + validCity2.getId()))
                 .andExpect(status().isOk())
                 .andReturn();
@@ -111,7 +120,7 @@ class CityControllerTest extends ControllerTest {
     }
 
     @Test
-    void searchByNameAndCountry() throws Exception {
+    void testSearchByNameAndCountry() throws Exception {
         given(cityService.searchBy(anyString(), anyString())).willReturn(allValidCities);
         MvcResult mvcResult = mockMvc.perform(get("/world/cities/search").param("name", "country")
                         .param("country", "countryCode"))

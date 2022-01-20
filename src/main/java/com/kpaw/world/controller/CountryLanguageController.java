@@ -21,7 +21,7 @@ public class CountryLanguageController {
 	}
 
 	@GetMapping("/countrylanguages")
-	public List<CountryLanguageDTO> showCountryLanguages(Model theModel) {
+	public List<CountryLanguageDTO> showCountryLanguages() {
 		return countryLanguageService.findAll();
 	}
 
