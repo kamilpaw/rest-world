@@ -1,6 +1,6 @@
 package com.kpaw.world.controller;
 
-import com.kpaw.world.entity.dto.CountryDTO;
+import com.kpaw.world.dto.CountryDTO;
 import com.kpaw.world.service.CountryService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

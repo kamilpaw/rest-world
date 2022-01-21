@@ -14,8 +14,6 @@ public interface CityRepository {
 
 	City findById(int theId);
 
-	City findByName(String theName);
-
 	List<City> findByNameAndCountry(String theName, String theCountry);
 
 }

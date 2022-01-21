@@ -1,8 +1,8 @@
 package com.kpaw.world.service;
 
 import com.kpaw.world.dao.CountryRepository;
-import com.kpaw.world.entity.dto.CountryDTO;
-import com.kpaw.world.entity.dto.Mapper;
+import com.kpaw.world.dto.CountryDTO;
+import com.kpaw.world.dto.Mapper;
 import com.kpaw.world.entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 @Service
 public class CountryServiceImp implements CountryService {
 
-	private CountryRepository countryRepository;
-	private Mapper mapper;
+	private final CountryRepository countryRepository;
+	private final Mapper mapper;
 
 	@Autowired
 	public CountryServiceImp(CountryRepository theCountryRepository, Mapper theMapper) {

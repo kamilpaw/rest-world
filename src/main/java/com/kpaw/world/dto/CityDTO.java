@@ -1,4 +1,4 @@
-package com.kpaw.world.entity.dto;
+package com.kpaw.world.dto;
 
 
 import javax.validation.constraints.Digits;

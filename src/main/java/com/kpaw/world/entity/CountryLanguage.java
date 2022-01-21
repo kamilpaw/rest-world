@@ -36,11 +36,6 @@ public class CountryLanguage {
 
 	}
 
-	public CountryLanguage(IsOfficial isOfficial, Double percentage) {
-		this.isOfficial = isOfficial;
-		this.percentage = percentage;
-	}
-
 	public CountryLanguage(Country countryCode, String language, IsOfficial isOfficial, Double percentage) {
 		this.countryCode = countryCode;
 		this.language = language;

@@ -1,6 +1,6 @@
 package com.kpaw.world.controller;
 
-import com.kpaw.world.entity.dto.CountryLanguageDTO;
+import com.kpaw.world.dto.CountryLanguageDTO;
 import com.kpaw.world.entity.IsOfficial;
 import com.kpaw.world.service.CountryLanguageService;
 import org.junit.jupiter.api.AfterEach;

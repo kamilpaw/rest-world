@@ -24,8 +24,7 @@ public class CityRepositoryImp implements CityRepository{
 		Session currentSession = sessionFactory.openSession();
 		Query<City> theQuery = 
 				currentSession.createQuery("from City", City.class);
-		List<City> cities = theQuery.getResultList();
-		return cities;
+		return theQuery.getResultList();
 	}
 
 	
@@ -52,17 +51,8 @@ public class CityRepositoryImp implements CityRepository{
 	@Override
 	public City findById(int theId) {
 		Session currentSession = sessionFactory.openSession();
-		City theCity = currentSession.get(City.class, theId);
-		return theCity;
-	};
-
-	@Override
-	public City findByName(String theName) {
-		Session currentSession = sessionFactory.openSession();
-		City theCity = currentSession.get(City.class, theName);
-		return theCity;
-	};
-
+		return currentSession.get(City.class, theId);
+	}
 	
 	@Override
 	public List<City> findByNameAndCountry(String theName, String theCountry){
@@ -71,8 +61,6 @@ public class CityRepositoryImp implements CityRepository{
 				currentSession.createQuery("from City where name like :theName and country.name like :theCountry", City.class);
 		theQuery.setParameter("theName", "%" + theName + "%");
 		theQuery.setParameter("theCountry", "%" + theCountry + "%");
-		List<City> cities = theQuery.getResultList();
-		return cities;
-	};
-
+		return theQuery.getResultList();
+	}
 }

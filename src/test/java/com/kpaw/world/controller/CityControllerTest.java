@@ -1,6 +1,6 @@
 package com.kpaw.world.controller;
 
-import com.kpaw.world.entity.dto.CityDTO;
+import com.kpaw.world.dto.CityDTO;
 import com.kpaw.world.service.CityService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +27,7 @@ class CityControllerTest extends ControllerTest {
 
     @MockBean
     CityService cityService;
+
     CityDTO validCity;
     CityDTO validCity2;
     List<CityDTO> allValidCities;

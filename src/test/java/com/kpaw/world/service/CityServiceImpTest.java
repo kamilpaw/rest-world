@@ -1,10 +1,9 @@
 package com.kpaw.world.service;
 
 import com.kpaw.world.dao.CityRepository;
-import com.kpaw.world.entity.Country;
-import com.kpaw.world.entity.dto.CityDTO;
-import com.kpaw.world.entity.dto.Mapper;
 import com.kpaw.world.entity.City;
+import com.kpaw.world.entity.Country;
+import com.kpaw.world.dto.Mapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -59,6 +58,7 @@ class CityServiceImpTest {
         service.findAll();
         then(cityRepository).should().findAll();
         assertTrue(cityRepository.findAll().size() == 2);
+        assertTrue(service.findAll().size()==2);
     }
 
     @Test
@@ -70,11 +70,6 @@ class CityServiceImpTest {
 
     @Test
     void testSave() {
-        CityDTO cityDTO = new CityDTO();
-        String name = "name";
-        cityDTO.setName(name);
-        City savedCity = new City();
-        savedCity.setId(1);
     }
 
     @Test

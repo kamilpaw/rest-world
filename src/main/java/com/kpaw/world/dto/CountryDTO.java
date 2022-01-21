@@ -1,11 +1,4 @@
-package com.kpaw.world.entity.dto;
-
-import com.kpaw.world.entity.City;
-import com.kpaw.world.entity.CountryLanguage;
-
-import javax.persistence.*;
-import javax.validation.constraints.Pattern;
-import java.util.List;
+package com.kpaw.world.dto;
 
 public class CountryDTO {
 

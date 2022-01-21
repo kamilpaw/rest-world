@@ -1,6 +1,6 @@
 package com.kpaw.world.controller;
 
-import com.kpaw.world.entity.dto.CountryLanguageDTO;
+import com.kpaw.world.dto.CountryLanguageDTO;
 import com.kpaw.world.service.CountryLanguageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/world")
 public class CountryLanguageController {
 
-	private CountryLanguageService countryLanguageService;
+	private final CountryLanguageService countryLanguageService;
 
 	public CountryLanguageController(CountryLanguageService theCountryLanguageService) {
 		countryLanguageService = theCountryLanguageService;
