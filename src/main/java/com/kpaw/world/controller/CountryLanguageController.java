@@ -1,8 +1,7 @@
 package com.kpaw.world.controller;
 
-import com.kpaw.world.dto.CountryLanguageDTO;
+import com.kpaw.world.entity.dto.CountryLanguageDTO;
 import com.kpaw.world.service.CountryLanguageService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

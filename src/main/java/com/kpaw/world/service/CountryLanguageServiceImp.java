@@ -3,14 +3,13 @@ package com.kpaw.world.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.kpaw.world.dto.CountryLanguageDTO;
-import com.kpaw.world.dto.Mapper;
+import com.kpaw.world.entity.dto.CountryLanguageDTO;
+import com.kpaw.world.entity.dto.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kpaw.world.dao.CountryLanguageRepository;
-import com.kpaw.world.entity.CountryLanguage;
 
 @Service
 public class CountryLanguageServiceImp implements CountryLanguageService {

@@ -1,8 +1,8 @@
 package com.kpaw.world.service;
 
 import com.kpaw.world.dao.CountryRepository;
-import com.kpaw.world.dto.CountryDTO;
-import com.kpaw.world.dto.Mapper;
+import com.kpaw.world.entity.dto.CountryDTO;
+import com.kpaw.world.entity.dto.Mapper;
 import com.kpaw.world.entity.Country;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

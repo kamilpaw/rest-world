@@ -1,6 +1,6 @@
 package com.kpaw.world.controller;
 
-import com.kpaw.world.dto.CityDTO;
+import com.kpaw.world.entity.dto.CityDTO;
 import com.kpaw.world.service.CityService;
 import org.springframework.web.bind.annotation.*;
 

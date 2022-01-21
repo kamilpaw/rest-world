@@ -2,8 +2,8 @@ package com.kpaw.world.service;
 
 import com.kpaw.world.controller.CityNotFoundException;
 import com.kpaw.world.dao.CityRepository;
-import com.kpaw.world.dto.CityDTO;
-import com.kpaw.world.dto.Mapper;
+import com.kpaw.world.entity.dto.CityDTO;
+import com.kpaw.world.entity.dto.Mapper;
 import com.kpaw.world.entity.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

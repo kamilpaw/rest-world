@@ -1,7 +1,6 @@
 package com.kpaw.world.service;
 
-import com.kpaw.world.dto.CountryLanguageDTO;
-import com.kpaw.world.entity.CountryLanguage;
+import com.kpaw.world.entity.dto.CountryLanguageDTO;
 
 import java.util.List;
 

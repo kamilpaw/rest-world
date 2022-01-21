@@ -2,7 +2,7 @@ package com.kpaw.world.service;
 
 import java.util.List;
 
-import com.kpaw.world.dto.CountryDTO;
+import com.kpaw.world.entity.dto.CountryDTO;
 import com.kpaw.world.entity.Country;
 
 public interface CountryService {
