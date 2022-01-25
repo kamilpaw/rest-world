@@ -7,9 +7,9 @@ import com.kpaw.world.entity.Country;
 
 public interface CountryService {
 
-	List<CountryDTO> findAll();
+	List<Country> findAll();
 
-	List<CountryDTO> searchBy(String theCode, String theName, String theRegion);
+	List<Country> searchBy(String theCode, String theName, String theRegion);
 
 	Country findCountryById(String theCountryCode);
 }

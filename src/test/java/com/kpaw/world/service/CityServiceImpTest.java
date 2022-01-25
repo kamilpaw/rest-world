@@ -3,7 +3,6 @@ package com.kpaw.world.service;
 import com.kpaw.world.dao.CityRepository;
 import com.kpaw.world.entity.City;
 import com.kpaw.world.entity.Country;
-import com.kpaw.world.dto.Mapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,16 +28,10 @@ class CityServiceImpTest {
     private List<City> cities;
 
     @Mock
-    Mapper mapper;
-
-    @Mock
     Country country;
 
     @Mock
     private CityRepository cityRepository;
-
-    @Mock
-    private CountryService countryService;
 
     @InjectMocks
     CityServiceImp service;
@@ -58,7 +51,8 @@ class CityServiceImpTest {
         service.findAll();
         then(cityRepository).should().findAll();
         assertTrue(cityRepository.findAll().size() == 2);
-        assertTrue(service.findAll().size()==2);
+        assertTrue(service.findAll().size() == 2);
+
     }
 
     @Test
@@ -70,6 +64,8 @@ class CityServiceImpTest {
 
     @Test
     void testSave() {
+        service.save(city1);
+        then(cityRepository).should().save(city1);
     }
 
     @Test
@@ -82,8 +78,9 @@ class CityServiceImpTest {
     void testFindById() {
         City city = new City();
         given(cityRepository.findById(1)).willReturn(city);
-        service.findById(1);
+        City foundCity = service.findById(1);
         then(cityRepository).should().findById(1);
+        assertThat(foundCity).isNotNull();
     }
 
     @Test
@@ -92,14 +89,6 @@ class CityServiceImpTest {
         assertThrows(RuntimeException.class, () -> service.findById(1));
     }
 
-    @Test
-    void findCityById() {
-        City city = new City();
-        given(cityRepository.findById(1)).willReturn(city);
-        City foundCity = service.findCityById(1);
-        assertThat(foundCity).isNotNull();
-        then(cityRepository).should().findById(1);
-    }
 }
 
 

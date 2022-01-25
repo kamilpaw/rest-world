@@ -1,11 +1,13 @@
 package com.kpaw.world.controller;
 
 import com.kpaw.world.dto.CityDTO;
+import com.kpaw.world.dto.Mapper;
 import com.kpaw.world.service.CityService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -13,31 +15,33 @@ import java.util.List;
 public class CityController {
 
     private final CityService cityService;
+    private final Mapper mapper;
 
-    public CityController(CityService theCityService) {
-        this.cityService = theCityService;
+    public CityController(CityService cityService, Mapper mapper) {
+        this.cityService = cityService;
+        this.mapper = mapper;
     }
 
     @GetMapping("/cities")
     public List<CityDTO> findAll() {
-        return cityService.findAll();
+        return cityService.findAll().stream().map(mapper::toCityDto).collect(Collectors.toList());
     }
 
     @GetMapping("/cities/{cityId}")
     public CityDTO getCity(@PathVariable int cityId) {
-        return cityService.findById(cityId);
+        return mapper.toCityDto(cityService.findById(cityId));
     }
 
     @PostMapping("/cities")
     public CityDTO addCity(@RequestBody @Valid CityDTO theCityDTO) {
         theCityDTO.setId(0);
-        cityService.save(theCityDTO);
+        cityService.save(mapper.toCity(theCityDTO));
         return theCityDTO;
     }
 
     @PutMapping("/cities")
     public CityDTO updateCity(@RequestBody @Valid CityDTO theCityDTO) {
-        cityService.save(theCityDTO);
+        cityService.save(mapper.toCity(theCityDTO));
         return theCityDTO;
     }
 
@@ -50,9 +54,9 @@ public class CityController {
     @GetMapping("/cities/search")
     public List<CityDTO> searchByNameAndCountry(@RequestParam(defaultValue = "") String name, @RequestParam(defaultValue = "") String country) {
         if (name.trim().isEmpty() && country.isEmpty()) {
-            return cityService.findAll();
+            return cityService.findAll().stream().map(mapper::toCityDto).collect(Collectors.toList());
         } else {
-            return cityService.searchBy(name, country);
+            return cityService.searchBy(name, country).stream().map(mapper::toCityDto).collect(Collectors.toList());
         }
     }
 }

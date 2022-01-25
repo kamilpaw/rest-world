@@ -4,10 +4,18 @@ import com.kpaw.world.entity.City;
 import com.kpaw.world.entity.Country;
 import com.kpaw.world.entity.CountryLanguage;
 import com.kpaw.world.service.CountryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Mapper {
+
+    @Autowired
+    CountryService countryService;
+
+    public Mapper(CountryService countryService) {
+        this.countryService = countryService;
+    }
 
     public CityDTO toCityDto(City city) {
         return new CityDTO(city.getId(), city.getName(), city.getCountry().getCode(),
@@ -15,7 +23,7 @@ public class Mapper {
 
     }
 
-    public City toCity(CityDTO cityDTO, CountryService countryService) {
+    public City toCity(CityDTO cityDTO) {
         Country country = countryService.findCountryById(cityDTO.getCountryCode());
         return new City(cityDTO.getId(), cityDTO.getName(), country, cityDTO.getDistrict(),
                 cityDTO.getPopulation());
@@ -32,9 +40,7 @@ public class Mapper {
                 country.getIndepYear(), country.getPopulation(), country.getLifeExpectancy(), country.getgNP(),
                 country.getgNPOld(), country.getLocalName(), country.getGovernmentForm(), country.getHeadOfState(),
                 country.getCapital().getId(), country.getCode2());
-
     }
-
 
     public CountryLanguageDTO toCountryLanguageDTO(CountryLanguage countryLanguage) {
         return new CountryLanguageDTO(countryLanguage.getCountryCode().getCode(),

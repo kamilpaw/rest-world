@@ -4,7 +4,6 @@ import com.kpaw.world.dao.CountryLanguageRepository;
 import com.kpaw.world.entity.Country;
 import com.kpaw.world.entity.CountryLanguage;
 import com.kpaw.world.entity.IsOfficial;
-import com.kpaw.world.dto.Mapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,15 +14,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 @ExtendWith(MockitoExtension.class)
 class CountryLanguageServiceImpTest {
-
-    @Mock
-    private Mapper mapper;
 
     @Mock
     private CountryLanguageRepository countryLanguageRepository;

@@ -1,39 +1,34 @@
 package com.kpaw.world.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import com.kpaw.world.dto.CountryLanguageDTO;
-import com.kpaw.world.dto.Mapper;
+import com.kpaw.world.dao.CountryLanguageRepository;
+import com.kpaw.world.entity.CountryLanguage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kpaw.world.dao.CountryLanguageRepository;
+import java.util.List;
 
 @Service
 public class CountryLanguageServiceImp implements CountryLanguageService {
 
-	private final Mapper mapper;
-	private final CountryLanguageRepository countryLanguageRepository;
+    private final CountryLanguageRepository countryLanguageRepository;
 
-	@Autowired
-	public CountryLanguageServiceImp(CountryLanguageRepository theCountryLanguageRepository, Mapper theMapper) {
-		this.countryLanguageRepository = theCountryLanguageRepository;
-		this.mapper = theMapper;
-	}
+    @Autowired
+    public CountryLanguageServiceImp(CountryLanguageRepository theCountryLanguageRepository) {
+        this.countryLanguageRepository = theCountryLanguageRepository;
+    }
 
-	@Override
-	@Transactional
-	public List<CountryLanguageDTO> findAll() {
+    @Override
+    @Transactional
+    public List<CountryLanguage> findAll() {
 
-		return countryLanguageRepository.findAll().stream().map(mapper::toCountryLanguageDTO).collect(Collectors.toList());
-	}
+        return countryLanguageRepository.findAll();
+    }
 
-	@Override
-	@Transactional
-	public List<CountryLanguageDTO> searchBy(String theLanguage, String theCountry) {
-		return countryLanguageRepository.searchBy(theLanguage,
-				theCountry).stream().map(mapper::toCountryLanguageDTO).collect(Collectors.toList());
-	}
+    @Override
+    @Transactional
+    public List<CountryLanguage> searchBy(String theLanguage, String theCountry) {
+        return countryLanguageRepository.searchBy(theLanguage,
+                theCountry);
+    }
 }
