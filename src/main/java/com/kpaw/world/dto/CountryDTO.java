@@ -18,9 +18,7 @@ public class CountryDTO {
     private String code2;
 
     public CountryDTO(){
-
     }
-
 
     public CountryDTO(String code, String name, String region, Double surfaceArea, Short indepYear, Integer population, Double lifeExpectancy, Double gNP, Double gNPOld, String localName, String governmentForm, String headOfState, Integer capital, String code2) {
         this.code = code;

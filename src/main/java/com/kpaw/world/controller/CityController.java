@@ -2,7 +2,9 @@ package com.kpaw.world.controller;
 
 import com.kpaw.world.dto.CityDTO;
 import com.kpaw.world.dto.Mapper;
+import com.kpaw.world.entity.City;
 import com.kpaw.world.service.CityService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,14 +34,21 @@ public class CityController {
         return mapper.toCityDto(cityService.findById(cityId));
     }
 
-    @PostMapping("/cities")
-    public CityDTO addCity(@RequestBody @Valid CityDTO theCityDTO) {
+
+    @PostMapping(value = "/cities",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        public CityDTO addCity(@RequestBody CityDTO theCityDTO) {
         theCityDTO.setId(0);
-        cityService.save(mapper.toCity(theCityDTO));
+        City city = mapper.toCity(theCityDTO);
+        System.out.println(city.getCountry().getName());
+        cityService.save(city);
         return theCityDTO;
     }
 
-    @PutMapping("/cities")
+    @PutMapping(value = "/cities",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public CityDTO updateCity(@RequestBody @Valid CityDTO theCityDTO) {
         cityService.save(mapper.toCity(theCityDTO));
         return theCityDTO;

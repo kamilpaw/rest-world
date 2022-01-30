@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -57,9 +58,9 @@ class CityServiceImpTest {
 
     @Test
     void testSearchBy() {
-        given(cityRepository.findByNameAndCountry("city", "country")).willReturn((List<City>) cities);
+        given(cityRepository.findByNameContainsAndCountryNameContainsAllIgnoreCase("city", "country")).willReturn((List<City>) cities);
         service.searchBy("city", "country");
-        then(cityRepository).should().findByNameAndCountry("city", "country");
+        then(cityRepository).should().findByNameContainsAndCountryNameContainsAllIgnoreCase("city", "country");
     }
 
     @Test
@@ -71,13 +72,13 @@ class CityServiceImpTest {
     @Test
     void testDeleteCityById() {
         service.deleteCityById(1);
-        verify(cityRepository, times(1)).deleteCityById(1);
+        verify(cityRepository, times(1)).deleteById(1);
     }
 
     @Test
     void testFindById() {
         City city = new City();
-        given(cityRepository.findById(1)).willReturn(city);
+        given(cityRepository.findById(1)).willReturn(Optional.of(city));
         City foundCity = service.findById(1);
         then(cityRepository).should().findById(1);
         assertThat(foundCity).isNotNull();

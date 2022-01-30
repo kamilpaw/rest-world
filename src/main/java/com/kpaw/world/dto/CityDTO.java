@@ -21,7 +21,10 @@ public class CityDTO {
     private Integer population;
 
     public CityDTO(){
+    }
 
+    public CityDTO(Integer id) {
+        this.id = id;
     }
 
     public CityDTO(Integer id, String name, String countryCode,

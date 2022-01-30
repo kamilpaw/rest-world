@@ -4,11 +4,10 @@ import com.kpaw.world.controller.CityNotFoundException;
 import com.kpaw.world.dao.CityRepository;
 import com.kpaw.world.entity.City;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CityServiceImp implements CityService {
@@ -22,39 +21,33 @@ public class CityServiceImp implements CityService {
     }
 
     @Override
-    @Transactional
     public List<City> findAll() {
         return cityRepository.findAll();
     }
 
     @Override
-    @Transactional
     public List<City> searchBy(String theName, String theCountry) {
-        return cityRepository.findByNameAndCountry(theName, theCountry);
+        return cityRepository.findByNameContainsAndCountryNameContainsAllIgnoreCase(theName, theCountry);
     }
 
-
     @Override
-    @Transactional
     public void save(City theCity) {
         cityRepository.save(theCity);
     }
 
     @Override
     public void deleteCityById(int theId) {
-        cityRepository.deleteCityById(theId);
+        cityRepository.deleteById(theId);
     }
 
     @Override
-    @Transactional
     public City findById(int theId) {
-        City theCity = cityRepository.findById(theId);
-        if (theCity == null) {
+        Optional<City> result = cityRepository.findById(theId);
+
+        if (result.isEmpty()) {
             throw new CityNotFoundException("City not found, id doesn't exist: " + theId);
         }
-        return theCity;
+        return result.get();
     }
-
-
 
 }
