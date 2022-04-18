@@ -41,7 +41,6 @@ public class CityController {
         public CityDTO addCity(@RequestBody CityDTO theCityDTO) {
         theCityDTO.setId(0);
         City city = mapper.toCity(theCityDTO);
-        System.out.println(city.getCountry().getName());
         cityService.save(city);
         return theCityDTO;
     }

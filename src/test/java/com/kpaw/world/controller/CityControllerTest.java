@@ -87,8 +87,8 @@ class CityControllerTest extends ControllerTest {
     @Test
     void testAddCity() throws Exception {
         MvcResult mvcResult = mockMvc.perform(post("/world/cities").
-                        contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(super.mapToJson(cityDTO1)))
+                        contentType(MediaType.APPLICATION_JSON_VALUE).
+                        content(super.mapToJson(cityDTO1)))
                 .andExpect(status().isOk())
                 .andReturn();
         int status = mvcResult.getResponse().getStatus();
