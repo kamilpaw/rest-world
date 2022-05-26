@@ -35,19 +35,15 @@ public class CityController {
     }
 
 
-    @PostMapping(value = "/cities",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-        public CityDTO addCity(@RequestBody CityDTO theCityDTO) {
+    @PostMapping(value = "/cities")
+        public CityDTO addCity(@Valid @RequestBody CityDTO theCityDTO) {
         theCityDTO.setId(0);
         City city = mapper.toCity(theCityDTO);
         cityService.save(city);
         return theCityDTO;
     }
 
-    @PutMapping(value = "/cities",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/cities")
     public CityDTO updateCity(@RequestBody @Valid CityDTO theCityDTO) {
         cityService.save(mapper.toCity(theCityDTO));
         return theCityDTO;
