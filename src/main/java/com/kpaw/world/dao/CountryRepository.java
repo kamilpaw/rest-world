@@ -1,15 +1,10 @@
 package com.kpaw.world.dao;
 
-import java.util.List;
-
 import com.kpaw.world.entity.Country;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface CountryRepository {
-
-	List<Country> findAll();
-
-	List<Country> searchBy(String theCode, String theName, String theRegion);
-
-	Country findById(String theCountryCode);
+@RepositoryRestResource(path= "countries")
+public interface CountryRepository extends JpaRepository<Country, String> {
 
 }

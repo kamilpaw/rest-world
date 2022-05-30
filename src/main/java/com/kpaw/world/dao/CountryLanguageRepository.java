@@ -1,13 +1,11 @@
 package com.kpaw.world.dao;
 
-import java.util.List;
-
 import com.kpaw.world.entity.CountryLanguage;
+import com.kpaw.world.entity.CountryLanguageKey;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-public interface CountryLanguageRepository {
-	
-	List<CountryLanguage> findAll();
-
-	List<CountryLanguage> searchBy(String theLanguage, String theCountry);
+@RepositoryRestResource(path= "languages")
+public interface CountryLanguageRepository extends JpaRepository<CountryLanguage, CountryLanguageKey> {
 
 }
